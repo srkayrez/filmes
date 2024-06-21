@@ -37,8 +37,19 @@ export class FilmesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.filmes.push(result);
-        console.log('Novo filme adicionado:', result);
+        this.filmeService.addFilme(result).subscribe(
+          novoFilme => {
+            if (novoFilme && novoFilme.id) {
+              this.filmes.push(novoFilme);
+              console.log('Novo filme adicionado:', novoFilme);
+            } else {
+              console.error('Erro: Objeto novoFilme é inválido ou não possui um ID válido.');
+            }
+          },
+          error => {
+            console.error('Erro ao adicionar filme:', error);
+          }
+        );
       }
     });
   }
@@ -48,24 +59,32 @@ export class FilmesComponent implements OnInit {
       width: '250px',
       data: { filme }
     });
-
+  
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.filmeService.updateFilme(result).subscribe(
           updatedFilme => {
-            const index = this.filmes.findIndex(f => f.id === updatedFilme.id);
-            if (index !== -1) {
+            const index = this.filmes.findIndex(f => f === updatedFilme);
+            if (index == index) {
               this.filmes[index] = updatedFilme;
               // Utilize o slice() para forçar a atualização da lista no Angular
               this.filmes = this.filmes.slice();
               console.log('Filme atualizado:', updatedFilme);
+  
+              // Recarrega a página após atualizar o filme
+              window.location.reload();
             }
           },
-          (error) => console.error('Erro ao atualizar filme:', error)
+          error => {
+            console.error('Erro ao atualizar filme:', error);
+          }
         );
       }
     });
   }
+  
+  
+  
 
 
 deleteFilme(filme: any): void {

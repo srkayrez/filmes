@@ -10,6 +10,10 @@ export class FilmeService {
 
   constructor(private http: HttpClient) { }
 
+  addFilme(filmeData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/Filme`, filmeData);
+  }
+
   getFilmes(page: number, size: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/Filme?page=${page}&size=${size}`);
   }
