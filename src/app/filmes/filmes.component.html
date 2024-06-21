@@ -1,0 +1,19 @@
+<div>
+    <h1>Filmes</h1>
+    <button mat-button (click)="openAddFilmeDialog()">Adicionar Filme</button>
+    <ul>
+      <li *ngFor="let filme of filmes; let i = index">
+        <h2>{{ filme.titulo }}</h2>
+        <p>Gênero: {{ filme.genero }}</p>
+        <p>Duração: {{ filme.duracao }} minutos</p>
+        <h3>Sessões:</h3>
+        <ul>
+          <li *ngFor="let sessao of filme.sessoes; let j = index">
+            <p>Sala: {{ sessao.id }}</p>
+          </li>
+        </ul>
+        <button mat-button (click)="openEditFilmeDialog(filme)">Editar</button>
+      </li>
+    </ul>
+  </div>
+  

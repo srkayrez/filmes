@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>{{ isEdit ? 'Editar Filme' : 'Adicionar Novo Filme' }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="filmeForm">
+    <mat-form-field>
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="titulo">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Gênero</mat-label>
+      <input matInput formControlName="genero">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Duração</mat-label>
+      <input matInput formControlName="duracao">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button (click)="onSave()" cdkFocusInitial>{{ isEdit ? 'Salvar' : 'Adicionar' }}</button>
+</div>

@@ -1,0 +1,9 @@
+.menu{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    gap: 2.5em;
+    text-align: center;
+}
+.itens_menu:hover{
+    background-color: black;
+}
