@@ -17,4 +17,9 @@ export class FilmeService {
   updateFilme(filme: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/Filme/${filme.id}`, filme);
   }
+
+  deleteFilme(id: number): Observable<void> {
+    const url = `${this.apiUrl}/Filme/${id}`;
+    return this.http.delete<void>(url);
+  }
 }

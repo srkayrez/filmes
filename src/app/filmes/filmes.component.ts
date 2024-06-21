@@ -66,4 +66,17 @@ export class FilmesComponent implements OnInit {
       }
     });
   }
+
+
+deleteFilme(filme: any): void {
+  if (confirm(`Tem certeza que deseja excluir o filme "${filme.titulo}"?`)) {
+    this.filmeService.deleteFilme(filme.id).subscribe(
+      () => {
+        this.filmes = this.filmes.filter(f => f.id !== filme.id);
+        console.log('Filme excluído:', filme);
+      },
+      error => console.error('Erro ao excluir filme:', error)
+    );
+  }
+}
 }
